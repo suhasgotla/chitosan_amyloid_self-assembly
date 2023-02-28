@@ -1,0 +1,20 @@
+Author	: Suhas Gotla
+Date	: 7 Jun 2020
+Title	: Summary of force field files for study of abeta aggregation in presence of oligosaccharide chains
+
+Files in this folder:
+
+1. newChitoABff.itp
+	- Force field itp with nonbonded interaction definitions
+2. abeta.itp
+	- Topology of abeta chain
+3. nglu_NUL.itp
+	- Topology of chitosan chain made up of hard spheres, designated by the bead type NUL
+4. water.itp
+	- Topology for polarizable water
+5. water_em.itp
+	- Topology for polarizable water with stiff bonds for minimization purposes
+6. posre_nglu.itp
+	- Position restraints file for chitosan chains where every bead is restrained with a 10000kJ/mol force constant
+7. posre_abeta.itp
+	- Position restraints file for abeta peptide where only the 4th backbone bead is restrained with a 10000kJ/mol force constant

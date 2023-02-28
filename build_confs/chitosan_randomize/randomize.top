@@ -1,0 +1,15 @@
+#include "../../ff/newChirosABff.itp"
+
+#include "../../ff/nglu_NUL.itp"
+
+#ifdef FLEXIBLE
+#include "../../ff/water_em.itp"
+#else
+#include "../../ff/water.itp"
+
+[ system ] 
+Randomization
+
+[ molecules ]
+NGLU 20
+PW   0

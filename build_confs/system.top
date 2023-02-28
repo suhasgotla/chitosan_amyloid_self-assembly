@@ -1,0 +1,26 @@
+#include "../../ff/newChitoABff.itp"
+
+#include "../../ff/nglu_NUL.itp
+#ifdef POSRE_CHI_ALL
+#include "../../ff/posre_nglu_all.itp
+#endif
+
+#include "../../ff/abeta.itp"
+#ifdef POSRE_ABETA
+#include "../../ff/posre_abeta.itp
+#endif
+
+#ifdef FLEXIBLE
+#include "../../ff/water_em.itp"
+#else
+#include "../../ff/water.itp
+#endif
+
+[system]
+Chitosan - 20, all NUL, 100 ABeta
+
+[ molecules ]
+NGLU	20
+Protein 100
+PW          41183
+CL               60

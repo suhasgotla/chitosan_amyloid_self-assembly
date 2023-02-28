@@ -1,0 +1,5 @@
+; position restraints for System of 
+
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+  14    1      10000      10000      10000

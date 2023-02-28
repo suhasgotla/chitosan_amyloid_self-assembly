@@ -1,0 +1,23 @@
+;;; IONS
+;
+; note, ions are not to be taken too seriously using a CG presentation.
+; long range electrostatic interactions are absent, and for small ions
+; the first hydration shell is considered an implicit part of the CG ion. 
+
+;;;;;; HYDRATED CHLORIDE ION
+
+[moleculetype]
+; molname 	nrexcl
+  CL 		1
+
+[atoms]
+;id 	type 	resnr 	residu 	atom 	cgnr 	charge
+ 1 	    Qa 	    1 	    CL      CL 	    1 	    -1.0 
+
+[ moleculetype ]
+; molname	nrexcl
+NA		1
+
+[ atoms ]
+;id	    type	resnr 	residu	atom    cgnr	charge
+1	    Qd	    1	    NA	    NA	    1	    1	 

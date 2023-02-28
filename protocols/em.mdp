@@ -1,0 +1,33 @@
+define			= -DFLEXIBLE -DPOSRE_ABETA -DPOSRE_CHI_ALL
+integrator              = steep
+dt                      = 0.01
+nsteps                  = 10000
+emstep			= 0.01
+emtol			= 10000
+pbc			= xyz
+nstcalcenergy           = 100
+nstxout-compressed	= 1000
+compressed-x-precision	= 200
+nstenergy               = 100
+nstlog                  = 100
+;
+cutoff-scheme           = group ; group is deprecated in gmx-versions. Verlet was introduced in v 4.6
+nstlist                 = 10
+rlist                   = 1.6
+coulombtype              = Shift
+rcoulomb_switch          = 0.9
+rcoulomb                 = 1.2
+;coulombtype             = pme
+;rcoulomb                = 1.6
+epsilon-r		= 2.5
+fourierspacing		= 0.12
+;pme-order		= 4
+;ewald_rtol               = 1e-05
+;ewald_geometry           = 3d
+;epsilon_surface          = 0
+;optimize_fft             = no
+
+;vdwtype                 = Shift
+vdw-modifier            = Force-switch ; equivalent to vdw-type = switch
+rvdw_switch             = 0.9
+rvdw                    = 1.2
