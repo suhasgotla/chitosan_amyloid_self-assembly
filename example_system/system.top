@@ -1,0 +1,33 @@
+; Include the main forcefield file
+#include "../ff/forcefield.itp"
+
+; Include itps for chitosan molecules
+#include "./nglu/nglu_0000.itp"
+#include "./nglu/nglu_0001.itp"
+
+; Include itp for amyloid-beta
+#include "../ff/abeta.itp"
+
+; Include itps for water
+#ifdef FLEXIBLE
+#include "../ff/water_em.itp"
+#else
+#include "../ff/water.itp"
+#endif
+
+; Include itps for monovalent ions
+#include "../ff/ions.itp"
+
+[ system ] 
+Chitosan-AB self-assembly
+
+[ molecules ]
+; molecule_name    number_of_molecules
+; For n chitosan (NGLU) molecules, list molecule names as NGLU<nglu_id>,
+; where 0 <= nglu_id < n, and nglu has 4 digits with padding zeros.
+; Example for 2 chitosan chains
+NGLU0000            1                   
+NGLU0001            1
+Protein             100
+PW          41237
+CL               6

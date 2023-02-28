@@ -16,7 +16,7 @@ outdat = './proto.txt'
 # User inputs
 n_chain         = 2 
 n_monomer       = 30
-prot_percentage = 50 
+prot_percentage = 10 
 
 # Generate a n_chain x n_monomer matrix of random numbers between 0 and 1
 rds = np.random.rand(n_monomer, n_chain)
