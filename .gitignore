@@ -1,0 +1,6 @@
+abeta_salt/*
+*.log
+*.xtc
+*.edr
+*.trr
+*.cpt
