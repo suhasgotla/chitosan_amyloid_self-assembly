@@ -1,4 +1,4 @@
-# Self-assembly of amyloid-$\beta$ peptides with chitosan using WEPPROM and MARTINI forcefields
+# Self-assembly of amyloid-β peptides with chitosan using WEPPROM and MARTINI forcefields
 
 This repository source files, and protocols to perform self-assembly simulations similar to those presented in ["Mechanistic insights...," _Phys. Chem. Chem. Phys._ (2023)](placeholder_link).
 
@@ -28,6 +28,7 @@ Simulation setup involves the following modules. First, create a new working dir
 
 1. Calculate the fraction of chitosan's 2'-amine groups that will be protonated/cationic at the selected pH using the Hendersen-Hasselbalch equation.
 
+<!--
     $$ pH = pKa + log\frac{ concentration\ of\ conjugate\ base }{ concentration\ of\ conjugate\ acid } $$
 
     $$ R-NH_3^+ \longleftrightarrow R-NH_2 + H^+ $$
@@ -41,6 +42,24 @@ Simulation setup involves the following modules. First, create a new working dir
     $$ {\alpha} = \frac{1}{1+10^{pH - 6.5}}$$
 
     For pH 7.5, $ {\alpha} = \frac{1}{1+10^{7.5 - 6.5}} = 0.0\bar{9} = 0.1 = 10\%$
+-->
+
+```
+pH = pKa + log(concentration of conjugate base / concentration of conjugate acid)
+
+R-NH₃⁺ ⇌ R-NH₂ + H⁺
+
+For chitosan, R-NH₃⁺ is the conjugate acid; R-NH₂ is the conjugate base, and the pKa for this reaction is 6.5.
+
+pH = 6.5 + log([R-NH₂]/[R-NH₃⁺])
+([R-NH₂]/[R-NH₃⁺]) = 10^(pH - 6.5)
+if α = degree of cationicity/protonation
+(1 - α)/α = 10^(pH - 6.5)
+α = 1/(1+10^(pH - 6.5))
+
+For pH 7.5, α = 1/(1+10^(7.5-6.5)) = 0.0̅9 = 0.1 = 10%
+
+```
 
 2. **Distribute the cationic charge randomly across all the chitosan chains.** 
 
