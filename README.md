@@ -164,7 +164,8 @@ PW                  41243
 
 ### V. Energy minimization
 Create a `em ` directory, `em.tpr` file.
-> `mkdir em; ~/programs/bin/gmx_mpi grompp -f ../protocols/em.mdp -c c2_a100_ions.gro -r c2_a100_ions.gro -p system.top -o em/em`
+> `mkdir em`
+> `~/programs/bin/gmx_mpi grompp -f ../protocols/em.mdp -c c2_a100_ions.gro -r c2_a100_ions.gro -p system.top -o em/em`
 
 Perform energy minimization.
 > `~/programs/bin/gmx_mpi mdrun -s em/em.tpr -deffnm em/em -v`
@@ -174,7 +175,7 @@ Perform energy minimization.
 We will set up 2 replicas, each initialized at different velocities.
 
 1. Make sub-directories for each iteration.
-    >> `mkdir eq/`
+    > `mkdir eq/`
 
 2. Create an equilibration tpr for each iteration.
 
@@ -200,7 +201,10 @@ Perform 700 ns of unrestrained NPT simulation
     The new group was numbered 18. I renamed group 18 to Solvent with the statement`"name 18 Solvent"`, and then hit enter. Group number in the reader's case need not be 18.
 
 2. Create tpr:
-    > `mkdir md/; ~/programs/bin/gmx_mpi grompp -f ../protocols/md.mdp -c eq/eq.gro -r eq/eq.gro -t eq/eq.cpt -p system.top -o md/md -n index.ndx`
+    Create a new directory for production MD files
+    > `mkdir md/` 
+    Create and save the tpr file in the new directory.
+    > `~/programs/bin/gmx_mpi grompp -f ../protocols/md.mdp -c eq/eq.gro -r eq/eq.gro -t eq/eq.cpt -p system.top -o md/md -n index.ndx`
 
 2. Perform production MD. 
     Running on HPCC is strongly recommended. 
