@@ -1,4 +1,4 @@
-define			= -DPOSRE_ABETA
+define			= -DPOSRE
 integrator              = md
 dt                      = 0.001
 nsteps                  = 5000

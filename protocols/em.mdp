@@ -1,4 +1,4 @@
-define			= -DFLEXIBLE -DPOSRE_ABETA -DPOSRE_CHI_ALL
+define			= -DFLEXIBLE -DPOSRE
 integrator              = steep
 dt                      = 0.01
 nsteps                  = 10000

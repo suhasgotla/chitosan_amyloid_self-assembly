@@ -1,4 +1,4 @@
-; position restraints for System of 
+; position restraints for bead #14 of an amyloid-beta 16-22 fragment
 
 [ position_restraints ]
 ;  i funct       fcx        fcy        fcz

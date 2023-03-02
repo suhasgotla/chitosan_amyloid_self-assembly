@@ -14,7 +14,6 @@ This repository source files, and protocols to perform self-assembly simulations
     * `abeta.itp` : Topology of the 7-residue chentral hydrophobic core region of amyloid-β, K<sub>16</sub>LVFFAE<sub>22</sub>, parameterized with the WEPPROM forcefield.  
     See [Sahoo et. al. "Pathways of amyloid-beta absorption and aggregation in a membranous environment" _Phys. Chem. Chem. Phys._ (2019)](https://par.nsf.gov/biblio/10174912) for details.
     * `posre_abeta.itp` : Restrains the position of residue F<sub>19</sub>'s BB bead of amyloid-β.
-    * `NGLU/NGLU*.itp` : TBA
     * `water.itp` : MARTINI polarizable water, where bonds between the central bead and dummy charges are treated with the LINCS constraint algorithm. 
     * `water_em.itp` : MARTINI polarizable water, where bonds between the central bead and dummy charges are treated with harmonic bonds.  
     Only used during energy minimization in case of instabilities. 
@@ -113,12 +112,20 @@ Here is an example file. Modify paths, molecule names, and numbers of molecules 
 ; Include the main forcefield file
 #include "../ff/forcefield.itp"
 
-; Include itps for chitosan molecules
-#include "./nglu/nglu_0000.itp"
-#include "./nglu/nglu_0001.itp"
-
-; Include itp for amyloid-beta
-#include "../ff/abeta.itp"
+; Include itps for chitosan molecules and amyloid-beta
+; if -DPOSRE flag is given in the mdp file, apply position restraints
+#ifdef POSRE    
+#include "./nglu/nglu_0000.itp"     ; first chitosan chain
+#include "../ff/posre_nglu.itp"     ; chitosan posre
+#include "./nglu/nglu_0001.itp"     ; second chitosan chain
+#include "../ff/posre_nglu.itp"     ; chitosan posre
+#include "../ff/abeta.itp"          ; amyloid-beta 
+#include "../ff/posre_abeta.itp"    ; amyloid-beta posre
+#else
+#include "./nglu/nglu_0000.itp"     ; first chitosan chain
+#include "./nglu/nglu_0001.itp"     ; second chitosan chain
+#include "../ff/abeta.itp"          ; amyloid-beta 
+#endif
 
 ; Include itps for water
 #ifdef FLEXIBLE
@@ -173,7 +180,7 @@ We will set up 2 replicas, each initialized at different velocities.
 
     We use Parrinello-Rahman barostat for equilibration, which raises a warning in GROMACS. The warning will be suppressed with the `-maxwarn 1` option in the `gmx grompp` call.
 
-    > `mkdir eq/; ~/programs/bin/gmx_mpi grompp -f ../protocols/eq_1fs.mdp -c em/em.gro -r em/em.gro -p system.top -o eq/eq -maxwarn 1`
+    > `~/programs/bin/gmx_mpi grompp -f ../protocols/eq_1fs.mdp -c em/em.gro -r em/em.gro -p system.top -o eq/eq -maxwarn 1`
 
 3. Perform equilibration.
     Run on an HPCC for faster performance. 

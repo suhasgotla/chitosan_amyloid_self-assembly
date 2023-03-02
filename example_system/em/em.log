@@ -30,7 +30,7 @@ GROMACS:      gmx mdrun, version 2019.4
 Executable:   /home/sgotla/programs/bin/gmx_mpi
 Data prefix:  /home/sgotla/programs
 Working dir:  /home/sgotla/chitosan/chitosan_amyloid_self-assembly/example_system
-Process ID:   31774
+Process ID:   8168
 Command line:
   gmx_mpi mdrun -s em/em.tpr -deffnm em/em -v
 
@@ -149,7 +149,7 @@ Input Parameters:
    comm-mode                      = Linear
    nstcomm                        = 100
    bd-fric                        = 0
-   ld-seed                        = -2080229963
+   ld-seed                        = -860585627
    emtol                          = 10000
    emstep                         = 0.01
    niter                          = 20
@@ -325,7 +325,7 @@ Removing pbc first time
 
 Note that activating steepest-descent energy minimization via the integrator .mdp option and the command gmx mdrun may be available in a different form in a future version of GROMACS, e.g. gmx minimize and an .mdp option.
 Initiating Steepest Descents
-Started Steepest Descents on rank 0 Tue Feb 28 18:08:11 2023
+Started Steepest Descents on rank 0 Thu Mar  2 13:01:25 2023
 
 
 Steepest Descents:
@@ -339,8 +339,10 @@ Grid: 16 x 16 x 16 cells
    Energies (kJ/mol)
            Bond          Angle       G96Angle    Proper Dih.          LJ-14
     6.95496e+03    3.09764e+02    1.55842e+05    1.08441e+02    0.00000e+00
-     Coulomb-14        LJ (SR)   Coulomb (SR)      Potential Pressure (bar)
-    0.00000e+00    1.06391e+07   -3.91985e+05    1.04104e+07    0.00000e+00
+     Coulomb-14        LJ (SR)   Coulomb (SR) Position Rest.      Potential
+    0.00000e+00    1.06391e+07   -3.91985e+05    2.49800e-10    1.04104e+07
+ Pressure (bar)
+    0.00000e+00
 
            Step           Time
               1        1.00000
@@ -348,94 +350,114 @@ Grid: 16 x 16 x 16 cells
    Energies (kJ/mol)
            Bond          Angle       G96Angle    Proper Dih.          LJ-14
     6.97621e+03    3.12634e+02    1.55852e+05    1.08630e+02    0.00000e+00
-     Coulomb-14        LJ (SR)   Coulomb (SR)      Potential Pressure (bar)
-    0.00000e+00    7.97824e+06   -3.91996e+05    7.74949e+06    0.00000e+00
+     Coulomb-14        LJ (SR)   Coulomb (SR) Position Rest.      Potential
+    0.00000e+00    7.97824e+06   -3.91996e+05    1.31752e+00    7.74949e+06
+ Pressure (bar)
+    0.00000e+00
 
            Step           Time
               2        2.00000
 
    Energies (kJ/mol)
            Bond          Angle       G96Angle    Proper Dih.          LJ-14
-    7.15473e+03    3.25169e+02    1.55877e+05    1.09302e+02    0.00000e+00
-     Coulomb-14        LJ (SR)   Coulomb (SR)      Potential Pressure (bar)
-    0.00000e+00    5.27856e+06   -3.92019e+05    5.05000e+06    0.00000e+00
+    7.15473e+03    3.25168e+02    1.55877e+05    1.09302e+02    0.00000e+00
+     Coulomb-14        LJ (SR)   Coulomb (SR) Position Rest.      Potential
+    0.00000e+00    5.27856e+06   -3.92019e+05    1.02176e+01    5.05002e+06
+ Pressure (bar)
+    0.00000e+00
 
            Step           Time
               3        3.00000
 
    Energies (kJ/mol)
            Bond          Angle       G96Angle    Proper Dih.          LJ-14
-    7.79405e+03    3.61929e+02    1.55917e+05    1.11083e+02    0.00000e+00
-     Coulomb-14        LJ (SR)   Coulomb (SR)      Potential Pressure (bar)
-    0.00000e+00    3.27743e+06   -3.92063e+05    3.04955e+06    0.00000e+00
+    7.79405e+03    3.61925e+02    1.55917e+05    1.11083e+02    0.00000e+00
+     Coulomb-14        LJ (SR)   Coulomb (SR) Position Rest.      Potential
+    0.00000e+00    3.27744e+06   -3.92063e+05    3.71595e+01    3.04960e+06
+ Pressure (bar)
+    0.00000e+00
 
            Step           Time
               4        4.00000
 
    Energies (kJ/mol)
            Bond          Angle       G96Angle    Proper Dih.          LJ-14
-    9.75918e+03    4.57087e+02    1.55975e+05    1.14843e+02    0.00000e+00
-     Coulomb-14        LJ (SR)   Coulomb (SR)      Potential Pressure (bar)
-    0.00000e+00    1.77235e+06   -3.92158e+05    1.54650e+06    0.00000e+00
+    9.75914e+03    4.57036e+02    1.55975e+05    1.14841e+02    0.00000e+00
+     Coulomb-14        LJ (SR)   Coulomb (SR) Position Rest.      Potential
+    0.00000e+00    1.77237e+06   -3.92158e+05    1.07151e+02    1.54662e+06
+ Pressure (bar)
+    0.00000e+00
 
            Step           Time
               5        5.00000
 
    Energies (kJ/mol)
            Bond          Angle       G96Angle    Proper Dih.          LJ-14
-    1.44185e+04    6.13565e+02    1.56027e+05    1.20131e+02    0.00000e+00
-     Coulomb-14        LJ (SR)   Coulomb (SR)      Potential Pressure (bar)
-    0.00000e+00    7.76215e+05   -3.92361e+05    5.55033e+05    0.00000e+00
+    1.44180e+04    6.13127e+02    1.56027e+05    1.20116e+02    0.00000e+00
+     Coulomb-14        LJ (SR)   Coulomb (SR) Position Rest.      Potential
+    0.00000e+00    7.76271e+05   -3.92361e+05    2.31357e+02    5.55320e+05
+ Pressure (bar)
+    0.00000e+00
 
            Step           Time
               6        6.00000
 
    Energies (kJ/mol)
            Bond          Angle       G96Angle    Proper Dih.          LJ-14
-    2.20980e+04    7.87561e+02    1.56038e+05    1.25338e+02    0.00000e+00
-     Coulomb-14        LJ (SR)   Coulomb (SR)      Potential Pressure (bar)
-    0.00000e+00    2.08757e+05   -3.92751e+05   -4.94569e+03    0.00000e+00
+    2.20967e+04    7.85604e+02    1.56038e+05    1.25269e+02    0.00000e+00
+     Coulomb-14        LJ (SR)   Coulomb (SR) Position Rest.      Potential
+    0.00000e+00    2.08822e+05   -3.92751e+05    3.91376e+02   -4.49244e+03
+ Pressure (bar)
+    0.00000e+00
 
            Step           Time
               7        7.00000
 
    Energies (kJ/mol)
            Bond          Angle       G96Angle    Proper Dih.          LJ-14
-    3.71084e+04    1.01397e+03    1.55932e+05    1.33826e+02    0.00000e+00
-     Coulomb-14        LJ (SR)   Coulomb (SR)      Potential Pressure (bar)
-    0.00000e+00   -2.08176e+05   -3.93688e+05   -4.07676e+05    0.00000e+00
+    3.70644e+04    1.00602e+03    1.55932e+05    1.33493e+02    0.00000e+00
+     Coulomb-14        LJ (SR)   Coulomb (SR) Position Rest.      Potential
+    0.00000e+00   -2.07478e+05   -3.93686e+05    6.69371e+02   -4.06360e+05
+ Pressure (bar)
+    0.00000e+00
 
            Step           Time
               8        8.00000
 
    Energies (kJ/mol)
            Bond          Angle       G96Angle    Proper Dih.          LJ-14
-    5.02769e+04    1.10824e+03    1.55654e+05    1.41847e+02    0.00000e+00
-     Coulomb-14        LJ (SR)   Coulomb (SR)      Potential Pressure (bar)
-    0.00000e+00   -4.03287e+05   -3.95322e+05   -5.91428e+05    0.00000e+00
+    5.02532e+04    1.08792e+03    1.55654e+05    1.40821e+02    0.00000e+00
+     Coulomb-14        LJ (SR)   Coulomb (SR) Position Rest.      Potential
+    0.00000e+00   -4.02993e+05   -3.95320e+05    9.37895e+02   -5.90239e+05
+ Pressure (bar)
+    0.00000e+00
 
            Step           Time
               9        9.00000
 
    Energies (kJ/mol)
            Bond          Angle       G96Angle    Proper Dih.          LJ-14
-    5.63620e+04    1.10771e+03    1.55237e+05    1.48947e+02    0.00000e+00
-     Coulomb-14        LJ (SR)   Coulomb (SR)      Potential Pressure (bar)
-    0.00000e+00   -5.06212e+05   -3.97768e+05   -6.91125e+05    0.00000e+00
+    5.63205e+04    1.06722e+03    1.55237e+05    1.46518e+02    0.00000e+00
+     Coulomb-14        LJ (SR)   Coulomb (SR) Position Rest.      Potential
+    0.00000e+00   -5.05812e+05   -3.97761e+05    1.17815e+03   -6.89624e+05
+ Pressure (bar)
+    0.00000e+00
 
            Step           Time
              10       10.00000
 
    Energies (kJ/mol)
            Bond          Angle       G96Angle    Proper Dih.          LJ-14
-    5.33177e+04    1.07884e+03    1.54353e+05    1.59038e+02    0.00000e+00
-     Coulomb-14        LJ (SR)   Coulomb (SR)      Potential Pressure (bar)
-    0.00000e+00   -5.96863e+05   -4.03279e+05   -7.91232e+05    0.00000e+00
+    5.32701e+04    9.95873e+02    1.54351e+05    1.52767e+02    0.00000e+00
+     Coulomb-14        LJ (SR)   Coulomb (SR) Position Rest.      Potential
+    0.00000e+00   -5.96426e+05   -4.03269e+05    1.54176e+03   -7.89383e+05
+ Pressure (bar)
+    0.00000e+00
 
 
 Steepest Descents converged to Fmax < 10000 in 11 steps
-Potential Energy  = -7.9123250e+05
-Maximum force     =  8.5320098e+03 on atom 73496
-Norm of force     =  2.9785272e+02
-Finished mdrun on rank 0 Tue Feb 28 18:08:15 2023
+Potential Energy  = -7.8938300e+05
+Maximum force     =  8.5382578e+03 on atom 73496
+Norm of force     =  2.9746745e+02
+Finished mdrun on rank 0 Thu Mar  2 13:01:29 2023
 

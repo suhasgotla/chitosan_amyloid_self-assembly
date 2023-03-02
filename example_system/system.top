@@ -1,12 +1,20 @@
 ; Include the main forcefield file
 #include "../ff/forcefield.itp"
 
-; Include itps for chitosan molecules
-#include "./nglu/nglu_0000.itp"
-#include "./nglu/nglu_0001.itp"
-
-; Include itp for amyloid-beta
-#include "../ff/abeta.itp"
+; Include itps for chitosan molecules and amyloid-beta
+; if -DPOSRE flag is given in the mdp file, apply position restraints
+#ifdef POSRE    
+#include "./nglu/nglu_0000.itp"     ; first chitosan chain
+#include "../ff/posre_nglu.itp"     ; chitosan posre
+#include "./nglu/nglu_0001.itp"     ; second chitosan chain
+#include "../ff/posre_nglu.itp"     ; chitosan posre
+#include "../ff/abeta.itp"          ; amyloid-beta 
+#include "../ff/posre_abeta.itp"    ; amyloid-beta posre
+#else
+#include "./nglu/nglu_0000.itp"     ; first chitosan chain
+#include "./nglu/nglu_0001.itp"     ; second chitosan chain
+#include "../ff/abeta.itp"          ; amyloid-beta 
+#endif
 
 ; Include itps for water
 #ifdef FLEXIBLE
