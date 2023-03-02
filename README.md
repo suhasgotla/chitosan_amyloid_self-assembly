@@ -1,6 +1,6 @@
-# Self-assembly of amyloid-β peptides with chitosan using WEPPROM and MARTINI forcefields
+# Coasre-grained self-assembly simulations of amyloid-β peptides with chitosan
 
-This repository source files, and protocols to perform self-assembly simulations similar to those presented in ["Mechanistic insights...," _Phys. Chem. Chem. Phys._ (2023)](placeholder_link).
+This repository source files, and protocols to perform self-assembly simulations similar to those presented in [Suhas Gotla and Silvina Matysiak. "Mechanistic insights...," _Phys. Chem. Chem. Phys._ (2023)](placeholder_link).
 
 ## Software Requirements
 * Python 3.X.X (Python 2 may work, but not tested.)
@@ -10,17 +10,19 @@ This repository source files, and protocols to perform self-assembly simulations
 
 * `ff/`: Forcefield files in GROMACS formats.
     * `forcefield.itp` : Definitions of coarse-grained beads used in this study, and their non-bonded interactions.  
-    The special-bead types used in WEPPROM are patched with standard MARTINI types used in 
+    The special-bead types used in WEPPROM are patched with standard MARTINI types.
     * `abeta.itp` : Topology of the 7-residue chentral hydrophobic core region of amyloid-β, K<sub>16</sub>LVFFAE<sub>22</sub>, parameterized with the WEPPROM forcefield.  
     See [Sahoo et. al. "Pathways of amyloid-beta absorption and aggregation in a membranous environment" _Phys. Chem. Chem. Phys._ (2019)](https://par.nsf.gov/biblio/10174912) for details.
     * `posre_abeta.itp` : Restrains the position of residue F<sub>19</sub>'s BB bead of amyloid-β.
+    * `posre_nglu.itp` : Restrains all beads of a 30-mer chitosan chain.
     * `water.itp` : MARTINI polarizable water, where bonds between the central bead and dummy charges are treated with the LINCS constraint algorithm. 
     * `water_em.itp` : MARTINI polarizable water, where bonds between the central bead and dummy charges are treated with harmonic bonds.  
     Only used during energy minimization in case of instabilities. 
+    * `ions.itp` : Topologies of monovalent anions and cations.
 
-* `generate_chitosan_itps/`: Scripts to generate itps of ensembles of chitosan molecules for a given number of chains, number of monomers per chain, and pH-dependent degree of cationicity.
+* `generate_chitosan_itps/`: Scripts to generate itps of ensembles of chitosan molecules for a given number of chains, number of monomers per chain, and pH-dependent degree of cationicity. See [Hongcheng Xu and Silvina Matysiak. "Effect of pH on chitosan hydrogel polymer network structure" _Chem. Commun._ (2017)](https://pubs.rsc.org/en/content/articlelanding/2017/CC/C7CC01826F) for details on the chitosan model.
 
-* `protocols/`: MD parameter files for energy minimization (`em.mdp`), equilibration (`eq_1fs.mdp`, `eq.mdp`), production MD (`md.mdp`) and for ion insertion with genion (`ions.mdp`)
+* `protocols/`: MD parameter files for energy minimization (`em.mdp`), equilibration (`eq_1fs.mdp`), production MD (`md.mdp`) and for ion insertion with genion (`ions.mdp`)
 
 ## Setup of self-asssembly simulations of amyloid-β with chitosan 
 
@@ -56,7 +58,8 @@ pH = pKa + log(concentration of conjugate base / concentration of conjugate acid
 
 R-NH₃⁺ ⇌ R-NH₂ + H⁺
 
-For chitosan, R-NH₃⁺ is the conjugate acid; R-NH₂ is the conjugate base, and the pKa for this reaction is 6.5.
+For chitosan, R-NH₃⁺ is the conjugate acid; R-NH₂ is the conjugate base, 
+and the pKa for this reaction is 6.5.
 
 pH = 6.5 + log([R-NH₂]/[R-NH₃⁺])
 ([R-NH₂]/[R-NH₃⁺]) = 10^(pH - 6.5)
@@ -210,3 +213,28 @@ Perform 700 ns of unrestrained NPT simulation
     Running on HPCC is strongly recommended. 
     > `mpirun ~/programs/bin/gmx_mpi mdrun -s  md/md.tpr -deffnm md/md -v`
     For testing, the user may use the `-nsteps` option to stop the simulation after a certain number of steps, although output options in md.mdp should be edited to output files at smaller intervals.
+
+
+## License
+
+MIT License
+
+Copyright (c) 2023 Suhas Gotla, and Silvina Matysiak
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
