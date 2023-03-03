@@ -1,6 +1,6 @@
 # Coasre-grained self-assembly simulations of amyloid-β peptides with chitosan
 
-This repository contains source files (initial coordinates, forcefield files, and molecular dynamics parameter files) required to perform self-assembly simulations similar to those presented in [Suhas Gotla and Silvina Matysiak. "Mechanistic insights...," _Phys. Chem. Chem. Phys._ (2023)](placeholder_link) (Link will be updated after publication).
+This repository contains source files (initial coordinates, forcefield files, and molecular dynamics parameter files) required to perform self-assembly simulations similar to those presented in [Suhas Gotla and Silvina Matysiak. "Mechanistic insights...," _submitted_ (2023)](placeholder_link) (Link will be updated after publication).
 
 The following sections present a brief step-by-step tutorial on setting up and running coarse-grained self-assembly simulations with amyloid-β peptides and chitosan.
 
