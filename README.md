@@ -1,6 +1,13 @@
 # Coasre-grained self-assembly simulations of amyloid-β peptides with chitosan
 
-This repository source files, and protocols to perform self-assembly simulations similar to those presented in [Suhas Gotla and Silvina Matysiak. "Mechanistic insights...," _Phys. Chem. Chem. Phys._ (2023)](placeholder_link).
+This repository contains source files (initial coordinates, forcefield files, and molecular dynamics parameter files) required to perform self-assembly simulations similar to those presented in [Suhas Gotla and Silvina Matysiak. "Mechanistic insights...," _Phys. Chem. Chem. Phys._ (2023)](placeholder_link).
+
+The following sections present a brief step-by-step tutorial on setting up and running coarse-grained self-assembly simulations with amyloid-β peptides and chitosan.
+
+## Contributions and Acknowledgements
+This package was prepared by **Suhas Gotla**, graduate student in **Prof. Silvina Matysiak's** research group at the University of Maryland. Former group members **Abhilash Sahoo**, and **Hongcheng Xu** contributed to initial forcefield development. Graduate student **Meenal Jain** performed tests, and provided feedback on the tutorial aspect of this repository. 
+
+Questions, comments, and requests must be addressed to Silvina Matysiak (matysiak@umd.edu) and/or Suhas Gotla (sgotla@umd.edu).
 
 ## Software Requirements
 * Python 3.X.X (Python 2 may work, but not tested.)
@@ -28,7 +35,7 @@ This repository source files, and protocols to perform self-assembly simulations
 
 Example outputs of this tutorial are available in the directory `example_system/`
 
-Note, in all gromacs command calls, `~/programs/bin/gmx_mpi` should be replaced with the path for the gromacs executable for whatever computer the tutorial is being performed on. Some steps may not work on a non-MPI installation of gromacs.
+Note, in all gromacs command calls, `gmx_mpi` should be replaced with the path for the gromacs executable for whatever computer the tutorial is being performed on. Some steps may not work on a non-MPI installation of gromacs.
 
 Simulation setup involves the following modules. First, create a new working directory for the simulation set up. We will call it `my_system/`
 > `mkdir my_system/`
@@ -73,7 +80,7 @@ For pH 7.5, α = 1/(1+10^(7.5-6.5)) = 0.0999... = 0.1 = 10%
 
 2. **Distribute the cationic charge randomly across all the chitosan chains.** 
 
-    Follow `generate_chitosan_itps/README.md` to create a set of itp files. In `generate_chitosan_itps/gen_itp.py`, change  `n_chain`, `n_monomer` and `prot_percentage` as  required.
+    Follow `generate_chitosan_itps/README.md` to create a set of itp files. In `generate_chitosan_itps/gen_proto.py`, change  `n_chain`, `n_monomer` and `prot_percentage` as  required.
 
     `generate_chitosan_itps/nglu/` contains the output files.
 
@@ -89,27 +96,28 @@ For pH 7.5, α = 1/(1+10^(7.5-6.5)) = 0.0999... = 0.1 = 10%
     **Output**: c2.gro, coordinates for 2 randomly placed 30-mer chitosan chains.  
     Using random seed 10 for reproducibility.
 
-    > `~/programs/bin/gmx_mpi insert-molecules -ci c1.gro -nmol 2 -o c2.gro -seed 10 -box 18 18 18`
+    > `gmx_mpi insert-molecules -ci c1.gro -nmol 2 -o c2.gro -seed 10 -box 18 18 18`
 
 2. Place 100 peptides at random positions in a 18 nm cubic box.  
     **Input**: c2.gro (coordinates of 2 randomly placed chitosan chains ) a1.gro (coordinates of 1 unstructured amyloid beta peptide)
     **Output**: c2_a100.gro, coordinates of 20 randomly placed chitosan chains and 100 amyloid-beta peptides.  
     (Using random seed 10 for reproducibility.)
-    > `~/programs/bin/gmx_mpi insert-molecules -f c2.gro -ci a1.gro -nmol 100 -o c2_a100.gro -box 18 18 18 -seed 10`
+    > `gmx_mpi insert-molecules -f c2.gro -ci a1.gro -nmol 100 -o c2_a100.gro -box 18 18 18 -seed 10`
 
 3. Solvate the box with MARTINI polarizable water.  
     Number of solvent molecules capped at 41243.
     **Input**: chitosan coordinates, `c2_a100.gro`, and water coordinates `polarize-water.gro.`
     **Output**: `c2_a100_solv.gro` : Solvated box containing 100 peptides.
-    > `~/programs/bin/gmx_mpi solvate -cp c2_a100.gro -cs polarize-water.gro -maxsol 41243 -o c2_a100_solv.gro`
+    > `gmx_mpi solvate -cp c2_a100.gro -cs polarize-water.gro -maxsol 41243 -o c2_a100_solv.gro`
 
 4. Create a new directory for further processing and simulation.
     
     > `cp c2_a100_solv.gro ../my_system/`
 
+<a name="abcde">
 ### III. Create an initial topology file (.top) for the solvated system
-
-Here is an example file. Modify paths, molecule names, and numbers of molecules as needed, and save as `system.top` in `my_system/`
+</a>
+Here is an example .top file. Modify paths, molecule names, and numbers of molecules as needed, and save as `system.top` in `my_system/`.
 
 ```
 ; Include the main forcefield file
@@ -157,21 +165,25 @@ PW                  41243
 
 ### IV. Neutralize excess charges with monovalent ions
 
-1. Navigate to `my_system/`
+1. Navigate to `my_system/`. Reminder: a system.top file should have been created and saved in `my_system/` by now (refer to [Section III](#abcde)).
 
-1. Create an dummy tpr for ion addition.
-    > `~/programs/bin/gmx_mpi grompp -f ../protocols/ions.mdp -c c2_a100_solv.gro -r c2_a100_solv.gro -p system.top -o ions.tpr`
+<!--
+(###iii.-create-an-initial-topology-file-\(\.top\)-for-the-solvated-system))
+-->
+
+2. Create an dummy tpr for ion addition.
+    > `gmx_mpi grompp -f ../protocols/ions.mdp -c c2_a100_solv.gro -r c2_a100_solv.gro -p system.top -o ions.tpr`
 
 3. Insert ions. Select group number corresponding to polarizable water. In this case, select Group 13: PW.
-    > `~/programs/bin/gmx_mpi genion -s ions.tpr -p system.top -neutral -seed 10 -o c2_a100_ions.gro`
+    > `gmx_mpi genion -s ions.tpr -p system.top -neutral -seed 10 -o c2_a100_ions.gro`
 
 ### V. Energy minimization
 Create a `em ` directory, `em.tpr` file.
 > `mkdir em`
-> `~/programs/bin/gmx_mpi grompp -f ../protocols/em.mdp -c c2_a100_ions.gro -r c2_a100_ions.gro -p system.top -o em/em`
+> `gmx_mpi grompp -f ../protocols/em.mdp -c c2_a100_ions.gro -r c2_a100_ions.gro -p system.top -o em/em`
 
 Perform energy minimization.
-> `~/programs/bin/gmx_mpi mdrun -s em/em.tpr -deffnm em/em -v`
+> `gmx_mpi mdrun -s em/em.tpr -deffnm em/em -v`
 
 ### VI. Equilibration
 
@@ -184,11 +196,11 @@ We will set up 2 replicas, each initialized at different velocities.
 
     We use Parrinello-Rahman barostat for equilibration, which raises a warning in GROMACS. The warning will be suppressed with the `-maxwarn 1` option in the `gmx grompp` call.
 
-    > `~/programs/bin/gmx_mpi grompp -f ../protocols/eq_1fs.mdp -c em/em.gro -r em/em.gro -p system.top -o eq/eq -maxwarn 1`
+    > `gmx_mpi grompp -f ../protocols/eq_1fs.mdp -c em/em.gro -r em/em.gro -p system.top -o eq/eq -maxwarn 1`
 
 3. Perform equilibration.
     Run on an HPCC for faster performance. 
-    > `mpirun ~/programs/bin/gmx_mpi mdrun -s  eq/eq.tpr -deffnm eq/eq -v`
+    > `mpirun gmx_mpi mdrun -s  eq/eq.tpr -deffnm eq/eq -v`
     If using non-mpi installation of gromacs, remove the `mpirun` prefix, and try the `-nt` option for parallelization with multithreading.
 
 ### VII. Production MD
@@ -197,7 +209,7 @@ Perform 700 ns of unrestrained NPT simulation
 1. Create an index group "Solvent" that contains water particles (resname PW) and ions (resname NA or resname CL).
 
     Run this command:
-    > `~/programs/bin/gmx_mpi make_ndx -f eq/eq.tpr -o index.ndx`
+    > `gmx_mpi make_ndx -f eq/eq.tpr -o index.ndx`
 
     When prompted select water particles and counter ions. In this case, I selected `"r PW | r CL"` and hit enter.
 
@@ -207,11 +219,11 @@ Perform 700 ns of unrestrained NPT simulation
     Create a new directory for production MD files
     > `mkdir md/` 
     Create and save the tpr file in the new directory.
-    > `~/programs/bin/gmx_mpi grompp -f ../protocols/md.mdp -c eq/eq.gro -r eq/eq.gro -t eq/eq.cpt -p system.top -o md/md -n index.ndx`
+    > `gmx_mpi grompp -f ../protocols/md.mdp -c eq/eq.gro -r eq/eq.gro -t eq/eq.cpt -p system.top -o md/md -n index.ndx`
 
 2. Perform production MD. 
     Running on HPCC is strongly recommended. 
-    > `mpirun ~/programs/bin/gmx_mpi mdrun -s  md/md.tpr -deffnm md/md -v`
+    > `mpirun gmx_mpi mdrun -s  md/md.tpr -deffnm md/md -v`
     For testing, the user may use the `-nsteps` option to stop the simulation after a certain number of steps, although output options in md.mdp should be edited to output files at smaller intervals.
 
 
@@ -219,7 +231,7 @@ Perform 700 ns of unrestrained NPT simulation
 
 MIT License
 
-Copyright (c) 2023 Suhas Gotla, and Silvina Matysiak
+Copyright (c) 2023 Matysiak Lab
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
