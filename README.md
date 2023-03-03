@@ -165,7 +165,7 @@ PW                  41243
 
 ### IV. Neutralize excess charges with monovalent ions
 
-1. Navigate to `my_system/`. Reminder: a system.top file should have been created and saved in `my_system/` by now (refer to [Section III](###iii.-create-an-initial-topology-file-\(\.top\)-for-the-solvated-system)).
+1. Navigate to `my_system/`. Reminder: a system.top file should have been created and saved in `my_system/` by now (refer to [Section III](###iii.-create-an-initial-topology-file-\(.top\)-for-the-solvated-system)).
 
 
 2. Create an dummy tpr for ion addition.
