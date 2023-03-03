@@ -13,7 +13,7 @@ nstlog                  = 100
 ;
 cutoff-scheme           = group ; group is deprecated in gmx-versions. Verlet was introduced in v 4.6
 nstlist                 = 10
-rlist                   = 1.6
+rlist                   = 1.2
 coulombtype              = Shift
 rcoulomb_switch          = 0.9
 rcoulomb                 = 1.2
