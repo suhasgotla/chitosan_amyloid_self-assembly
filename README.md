@@ -115,7 +115,7 @@ For pH 7.5, α = 1/(1+10^(7.5-6.5)) = 0.0999... = 0.1 = 10%
     > `cp c2_a100_solv.gro ../my_system/`
 
 
-### III. Create an initial topology file for the solvated system
+### III. Create an initial topology file (.top) for the solvated system
 
 Here is an example .top file. Modify paths, molecule names, and numbers of molecules as needed, and save as `system.top` in `my_system/`.
 
@@ -165,7 +165,7 @@ PW                  41243
 
 ### IV. Neutralize excess charges with monovalent ions
 
-1. Navigate to `my_system/`. Reminder: a system.top file should have been created and saved in `my_system/` by now (refer to [Section III](###iii.-create-an-initial-topology-file-for-the-solvated-system)).
+1. Navigate to `my_system/`. Reminder: a system.top file should have been created and saved in `my_system/` by now (refer to [Section III. Create an initial topology file for the solvated system](###iii\.-create-an-initial-topology-file-\(\.top\)-for-the-solvated-system)).
 
 
 2. Create an dummy tpr for ion addition.
